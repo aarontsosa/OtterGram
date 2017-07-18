@@ -29,6 +29,7 @@ body {
 
   font-size: 10px;
   background: rgb(149, 194, 215);
+  transition: all 1s;
   font-family: 'Open Sans';
 }
 .classic{
