@@ -24,35 +24,55 @@ window.onload = function randomImage() {
     targetName.textContent = nav[x].getAttribute('data-thumb-title')
 }
 
-var nav = {
+var nev = [
     {
         href: "img/otter1.jpg",
-        image-title: "Stayin' Alive",
-        color-type: "classic",
-        thumb-title: "Barry",
-    }
+        imageTitle: "Stayin' Alive",
+        colorType: "classic",
+        thumbTitle: "Barry",
+    },
     {
         href: "img/otter2.jpg",
-        image-title: "How Deep Is Your Love",
-        color-type: "coral",
-        thumb-title: "Robbin"
-    }
+        imageTitle: "How Deep Is Your Love",
+        colorType: "coral",
+        thumbTitle: "Robbin"
+    },
     {
         href: "img/otter3.jpg",
-        image-title: "You Should Be Dancing",
-        color-type: "green",
-        thumb-title: "Maurice"
-    }
+        imageTitle: "You Should Be Dancing",
+        colorType: "green",
+        thumbTitle: "Maurice"
+    },
     {
         href: "img/otter4.jpg",
-        image-title: "Night Fever",
-        color-type: "seagreen",
-        thumb-title: "Lesley"
-    }
+        imageTitle: "Night Fever",
+        colorType: "seagreen",
+        thumbTitle: "Lesley"
+    },
     {
         href: "img/otter5.jpg",
-        image-title: "To Love Somebody",
-        color-type: "grey",
-        thumb-title: "Barbara"
+        imageTitle: "To Love Somebody",
+        colorType: "grey",
+        thumbTitle: "Barbara"
     }
+]
+
+var links = document.getElementsByTagName('a')
+function loadHref(){
+    var i = 0
+    return nev.forEach((x) =>{
+        links[i].setAttribute('href', x.href)
+        i += 1
+    })
 }
+function randomImage() {
+    x = Math.floor(Math.random() * 4)
+    targetImg.setAttribute('src', nav[x].getAttribute('href'))
+    targetTitle.textContent = nav[x].getAttribute('data-image-title')
+    targetColor.setAttribute('class', nav[x].getAttribute('data-color-type'))
+    targetName.textContent = nav[x].getAttribute('data-thumb-title')
+}
+
+window.onload = loadHref()
+randomImage();
+
