@@ -1,23 +1,8 @@
 var nav = document.querySelectorAll('[data-image-role="trigger"]')
-var list = document.getElementsByTagName('li')
-var links = [document.createElement('a'),document.createElement('a'),document.createElement('a'),document.createElement('a'),document.createElement('a')]
-var image = [document.createElement('img'),document.createElement('img'),document.createElement('img'),document.createElement('img'),document.createElement('img')]
-var span = [document.createElement('span'),document.createElement('span'),document.createElement('span'),document.createElement('span'),document.createElement('span')]
 var targetImg = document.querySelector('[data-image-role="target"]')
 var targetTitle = document.querySelector('[data-image-role="title"]')
 var targetColor = document.querySelector('[data-color="target"]')
 var targetName = document.querySelector('[data-thumb-title-role="target"]')
-
-nav.forEach((nav) => {
-    nav.addEventListener('click', (event) => {
-        event.preventDefault();
-        targetImg.setAttribute('src', nav.getAttribute('href'))
-        targetTitle.textContent = nav.getAttribute('data-image-title')
-        targetColor.setAttribute('class', nav.getAttribute('data-color-type'))
-        targetName.textContent = nav.getAttribute('data-thumb-title')
-    })   
-})
-
 
 var nev = [
     {
@@ -105,25 +90,30 @@ function toArray(nodeList){
     return arr
 }
 
-function loadPics(){
-    loadElements();
-    loadLinkAtt();
-    loadImageAtt();
-    loadSpanAtt();
-    appendHTML();
+function createA(){
+    return links = [document.createElement('a')]
 }
 
-
-function loadElements(){
-    var links = [document.createElement('a'),document.createElement('a'),document.createElement('a'),document.createElement('a'),document.createElement('a')]
-    var image = [document.createElement('img'),document.createElement('img'),document.createElement('img'),document.createElement('img'),document.createElement('img')]
-    var span = [document.createElement('span'),document.createElement('span'),document.createElement('span'),document.createElement('span'),document.createElement('span')]
-    return 
+function createImg(){
+    return image = [document.createElement('img')]
 }
+
+function createSpan(){
+    return span = [document.createElement('span')]
+}
+
+function howmany(type, num){
+    for (i=1; i < num; i++){
+        type.push(type[0])
+    }
+    return type
+}
+
 
 function loadLinkAtt(){
+    howmany(createA(), 5)
     var i = 0
-    return nev.forEach((x) =>{
+    nev.forEach((x) =>{
         links[i].setAttribute('href', x.href)
         links[i].setAttribute('data-image-role', x.imageRole)
         links[i].setAttribute('data-image-title', x.imageTitle)
@@ -132,29 +122,42 @@ function loadLinkAtt(){
         links[i].setAttribute('data-color-type', x.colorType)
         i += 1
     })
+    return links
 }
 
 function loadImageAtt(){
+    howmany(createImg(), 5)
     var i = 0
-    return nev.forEach((x) =>{
+    nev.forEach((x) =>{
         image[i].setAttribute('class', x.imgClass)
         image[i].setAttribute('src', x.imgSrc)
         image[i].setAttribute('alt', x.imgAlt)
         i += 1
     })
+    return image
 }
 
 function loadSpanAtt(){
+    howmany(createSpan(), 5)
     var i = 0
-    return nev.forEach((x) =>{
+    nev.forEach((x) =>{
         span[i].setAttribute('class', x.spanClass)
         span[i].textContent = x.spanText
         i += 1
     })
+    return span
+}
+
+function listArr(){
+    var list = document.getElementsByTagName('li')
+    return list = toArray(list)
 }
 
 function appendHTML(){
-    list = toArray(list)
+    listArr();
+    loadImageAtt();
+    loadLinkAtt();
+    loadSpanAtt();
     var i = 0
     list.forEach((x)=>{
         x.appendChild(links[i])
@@ -193,5 +196,5 @@ function randomImage() {
     targetName.textContent = nav[x].getAttribute('data-thumb-title')
 }
 
-window.onload = loadPics()
+window.onload = appendHTML();
 navigation();
