@@ -173,10 +173,15 @@ function navigation(){
     nav.forEach((nav) => {
     nav.addEventListener('click', (event) => {
         event.preventDefault();
+        targetImg.classList.remove('fade');
         targetImg.setAttribute('src', nav.getAttribute('href'))
         targetTitle.textContent = nav.getAttribute('data-image-title')
         targetColor.setAttribute('class', nav.getAttribute('data-color-type'))
         targetName.textContent = nav.getAttribute('data-thumb-title')
+        targetImg.classList.toggle('fade');
+        targetTitle.classList.toggle('fade');
+        targetColor.classList.toggle('fade');
+        targetName.classList.toggle('fade');
     })   
 })
 }
