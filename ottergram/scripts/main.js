@@ -83,11 +83,11 @@ var nev = [
 ]
 
 function toArray(nodeList){
-    var arr = nodeList;
+    var list = nodeList;
     if (nodeList.forEach === undefined) {
-        arr = [].slice.call(nodeList)
+        list = [].slice.call(nodeList)
     }
-    return arr
+    return list
 }
 
 function createA(){
@@ -111,40 +111,34 @@ function howmany(type, num){
 
 
 function loadLinkAtt(){
-    howmany(createA(), 5)
-    var i = 0
-    nev.forEach((x) =>{
-        links[i].setAttribute('href', x.href)
-        links[i].setAttribute('data-image-role', x.imageRole)
-        links[i].setAttribute('data-image-title', x.imageTitle)
-        links[i].setAttribute('data-thumb-title', x.thumbTitle)
-        links[i].setAttribute('data-image-url', x.imageURL)
-        links[i].setAttribute('data-color-type', x.colorType)
-        i += 1
-    })
+    links = howmany(createA(), 5)
+    for(i=0; i < links.length; i++) {
+        links[i].setAttribute('href', nev[i]['href'])
+        links[i].setAttribute('data-image-role', nev[i]['imageRole'])
+        links[i].setAttribute('data-image-title', nev[i]['imageTitle'])
+        links[i].setAttribute('data-thumb-title', nev[i]['thumbTitle'])
+        links[i].setAttribute('data-image-url', nev[i]['imageURL'])
+        links[i].setAttribute('data-color-type', nev[i]['colorType'])
+    }
     return links
 }
 
 function loadImageAtt(){
-    howmany(createImg(), 5)
-    var i = 0
-    nev.forEach((x) =>{
-        image[i].setAttribute('class', x.imgClass)
-        image[i].setAttribute('src', x.imgSrc)
-        image[i].setAttribute('alt', x.imgAlt)
-        i += 1
-    })
+    image = howmany(createImg(), 5)
+    for(i=0; i < image.legth; i++){
+        image[i].setAttribute('class', nev[i]['imgClass'])
+        image[i].setAttribute('src',   nev[i]['imgSrc'])
+        image[i].setAttribute('alt', nev[i]['imgAlt'])
+    }
     return image
 }
 
 function loadSpanAtt(){
-    howmany(createSpan(), 5)
-    var i = 0
-    nev.forEach((x) =>{
-        span[i].setAttribute('class', x.spanClass)
-        span[i].textContent = x.spanText
-        i += 1
-    })
+    span = howmany(createSpan(), 5)
+    for (i=0; i < span.length; i++){
+        span[i].setAttribute('class', nev[i]['spanClass'])
+        span[i].textContent = nev[i]['spanText']
+    }
     return span
 }
 
@@ -154,16 +148,16 @@ function listArr(){
 }
 
 function appendHTML(){
-    listArr();
-    loadImageAtt();
-    loadLinkAtt();
-    loadSpanAtt();
-    var i = 0
+    image = loadImageAtt();
+    links = loadLinkAtt();
+    span = loadSpanAtt();
+    var list = listArr();
+    var y = 0
     list.forEach((x)=>{
-        x.appendChild(links[i])
-        links[i].appendChild(image[i])
-        links[i].appendChild(span[i])
-        i+= 1
+        x.appendChild(links[y])
+        x.appendChild(image[y])
+        x.appendChild(span[y])
+        y += 1
     })
 }
 
